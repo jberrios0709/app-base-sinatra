@@ -1,0 +1,1 @@
+docker run -it --rm -v "$(pwd)"/app:/usr/src/app -p 127.0.0.1:4567:4567 --name app-sinatra app-base-sinatra
