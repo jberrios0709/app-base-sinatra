@@ -1,1 +1,1 @@
-docker run -it --rm -v "$(pwd)"/app:/usr/src/app -p 127.0.0.1:4567:4567 --name app-sinatra app-base-sinatra
+docker run -it --rm -v "$(pwd)"/app:/usr/src/app -p 127.0.0.1:4567:4567 --env HMAC_SECRET=NtIlBFF50hLu6vZ --env JWT_ISSUER=ZW48lpj1garKMXj --env SECRET_KEY_CRYPTO=iDS2CWKBK7tfYCSbfK4ZEv5HaDVa99la --name app-base-sinatra backend-base-sinatra

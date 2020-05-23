@@ -4,7 +4,7 @@ Aplicacion base para desarrollo en sinatra
 ### Docker
 Crear imagen:
 ```bash
-docker build -t app-base-sinatra .
+docker build -t backend-renta-externa .
 ```
 
 Iniciar el contenedor:

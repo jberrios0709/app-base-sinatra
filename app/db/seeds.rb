@@ -1,5 +1,7 @@
 require_relative '../lib/configuration'
 
 Models::User.create!(
-  name: 'jose berrios'
+  username: 'josealbertoberrios_15@gmail.com',
+  name: 'jose berrios',
+  password: 'password1234'
 )

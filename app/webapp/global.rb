@@ -1,9 +1,11 @@
 require_relative '../lib/configuration'
-require_relative './internal_controller'
+require_relative './public_controller'
+require_relative './admin_controller'
 
 module Webapp
-  class Global < Sinatra::Base
+  class Global < App::Base
     register Sinatra::ActiveRecordExtension
-    use InternalController
+    use PublicController
+    use AdminController
   end
 end

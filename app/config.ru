@@ -1,5 +1,7 @@
 require_relative 'webapp/global'
 
-map '/' do
-  run Webapp::Global
-end
+run Rack::URLMap.new(
+  {
+    '/v1' => Webapp::Global
+  }
+)
