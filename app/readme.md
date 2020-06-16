@@ -4,7 +4,7 @@ Aplicacion base para desarrollo en sinatra
 ### Docker
 Crear imagen:
 ```bash
-docker build -t backend-renta-externa .
+docker build -t backend-app-base .
 ```
 
 Iniciar el contenedor:
@@ -15,7 +15,7 @@ sh deploy.sh
 
 Conectarse al container: 
 ```bash
-docker exec -it app-sinatra /bin/bash
+docker exec -it backend-app-base /bin/bash
 ```
 
 ### Crear migracion

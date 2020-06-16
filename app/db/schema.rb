@@ -10,12 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_26_201555) do
+ActiveRecord::Schema.define(version: 2020_06_15_225746) do
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "cellphone"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.index ["user_id"], name: "index_user_profile_unique", unique: true
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.integer "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_rola_name_unique", unique: true
+  end
+
+  create_table "token_actions", force: :cascade do |t|
+    t.string "token"
+    t.string "action"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_token_actions_on_token", unique: true
+    t.index ["user_id"], name: "index_token_actions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
-    t.string "name"
     t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "role_id"
+    t.boolean "active", default: false
+    t.string "token_authenticator"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

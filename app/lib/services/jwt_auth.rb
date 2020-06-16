@@ -1,6 +1,7 @@
 class JwtAuth
-  def initialize(app)
+  def initialize(app, role)
     @app = app
+    @role = role
   end
 
   def call(env)
@@ -10,8 +11,10 @@ class JwtAuth
       payload, header = JWT.decode bearer, ENV['HMAC_SECRET'], true, options
 
       env[:user] = payload['user']
-
+      check_role!(payload['user'])
       @app.call env
+    rescue ActiveRecord::RecordNotFound, App::Errors::Unauthenticated
+      [401, { 'Content-Type' => 'text/plain' }, ['Unauthorized.']]
     rescue JWT::DecodeError
       [401, { 'Content-Type' => 'text/plain' }, ['A token must be passed.']]
     rescue JWT::ExpiredSignature
@@ -23,4 +26,10 @@ class JwtAuth
     end
   end
 
+  private
+
+  def check_role!(user_attributes)
+    user = Models::User.find_by! user_attributes
+    raise App::Errors::Unauthenticated unless @role.include?(user.role.name)
+  end
 end
